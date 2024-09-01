@@ -62,5 +62,6 @@ def predict_digit():
     
     return jsonify({'prediction': int(prediction[0])})
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     logging.basicConfig(level=logging.INFO)
+#     app.run(debug=True)

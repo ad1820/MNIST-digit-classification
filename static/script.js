@@ -6,11 +6,9 @@ const resultP = document.getElementById('result');
 
 let isDrawing = false;
 
-// Set canvas size
 canvas.width = 280;
 canvas.height = 280;
 
-// Set initial canvas state
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 ctx.strokeStyle = 'black';
@@ -22,7 +20,6 @@ canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseup', stopDrawing);
 canvas.addEventListener('mouseout', stopDrawing);
 
-// Add touch event listeners for mobile devices
 canvas.addEventListener('touchstart', handleTouch);
 canvas.addEventListener('touchmove', handleTouch);
 canvas.addEventListener('touchend', stopDrawing);
@@ -78,18 +75,15 @@ function clearCanvas() {
 }
 
 function predict() {
-    // Get image data
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
 
-    // Convert to grayscale and normalize
     const grayScaleData = [];
     for (let i = 0; i < data.length; i += 4) {
         const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-        grayScaleData.push(1 - avg / 255); // Invert and normalize
+        grayScaleData.push(1 - avg / 255); 
     }
 
-    // Resize to 28x28
     const resizedData = resizeArray(grayScaleData, 280, 280, 28, 28);
 
     fetch('/predict', {
